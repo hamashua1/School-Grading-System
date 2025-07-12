@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+<body>
+
+
+<h1>
+</h1>
+
+<div>
+    <div>
+        <input type="text" id = "name" placeholder="Enter your name">
+        <input type="number" id="score" placeholder="Enter your score">
+        <button id="add" onClick="addUser()">Add User</button>
+        <button id="show" onClick="showUser()">Show User</button>
+        <button id="sort" onclick="sortUser()">Sort User </button>
+        
+        <p id="output"></p>
+
+      </div>
+      
+</div>
+
+<script>
+          function addUser(){
+let name = document.getElementById("name").value //name of user input 
+let score = Number(document.getElementById("score").value) // score of the user input
+
+let family = JSON.parse(localStorage.getItem('users'))|| []  //gets the name and score from the local storage
+family.push({name,score})
+
+localStorage.setItem('users', JSON.stringify(family)) //saves the name and score in the local storage
+
+document.getElementById("name").value = ""
+document.getElementById("score").value = ""
+}
+
+
+function showUser(){
+let user = localStorage.getItem('users') 
+let family = JSON.parse(user) || [] // retreived saved users
+let display = document.getElementById('output')
+display.innerHTML = "" // Clear previous content
+   for (let i=0; i<family.length; i++){
+    display.innerHTML += `<p>${family[i].name} - ${family[i].score} <button onClick="clearUser(${i})">Clear User</button></p>`
+   }
+}
+
+function clearUser(i){
+    let user = localStorage.getItem('users')
+    let family = JSON.parse(user) || []
+    family.splice(i,1)
+    localStorage.setItem('users', JSON.stringify(family))
+    showUser()
+    
+}
+
+function sortUser(){
+    let display = document.getElementById('output')
+    let family = JSON.parse(localStorage.getItem('users')) || []
+    family.sort ((a,b) => a.score - b.score)
+    display.innerHTML = ""
+    for (let i=0; i<family.length; i++){
+       if (family[i].score >= 70){
+        display.innerHTML += `<p>${family[i].name} - ${family[i].score} passed <button onClick="clearUser(${i})">Clear User</button></p>`
+}else{
+    display.innerHTML += `<p>${family[i].name} - ${family[i].score} failed <button onClick="clearUser(${i})">Clear User</button></p>`
+}
+}
+}
+
+</script>
+
+
+
