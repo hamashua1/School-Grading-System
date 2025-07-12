@@ -29,7 +29,9 @@
 </div>
 
 <script>
-          function addUser(){
+
+
+function addUser(){
 let name = document.getElementById("name").value //name of user input 
 let score = Number(document.getElementById("score").value) // score of the user input
 
@@ -43,6 +45,7 @@ document.getElementById("score").value = ""
 }
 
 
+
 function showUser(){
 let user = localStorage.getItem('users') 
 let family = JSON.parse(user) || [] // retreived saved users
@@ -52,6 +55,9 @@ display.innerHTML = "" // Clear previous content
     display.innerHTML += `<p>${family[i].name} - ${family[i].score} <button onClick="clearUser(${i})">Clear User</button></p>`
    }
 }
+
+
+
 
 function clearUser(i){
     let user = localStorage.getItem('users')

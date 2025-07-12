@@ -29,7 +29,9 @@
 </div>
 
 <script>
-          function addUser(){
+
+
+function addUser(){
 let name = document.getElementById("name").value //name of user input 
 let score = Number(document.getElementById("score").value) // score of the user input
 
@@ -53,6 +55,9 @@ display.innerHTML = "" // Clear previous content
    }
 }
 
+
+
+
 function clearUser(i){
     let user = localStorage.getItem('users')
     let family = JSON.parse(user) || []
@@ -61,6 +66,10 @@ function clearUser(i){
     showUser()
     
 }
+
+
+
+
 
 function sortUser(){
     let display = document.getElementById('output')
